@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerDeplacement : MonoBehaviour
+public class PlayerDeplacement3D : MonoBehaviour
 {
     //[Header("Keys")]
     private string horizontalAxis = "Horizontal";
@@ -15,7 +15,7 @@ public class PlayerDeplacement : MonoBehaviour
     [SerializeField]
     private float jumpForce;
     [SerializeField]
-    private Vector2 checkSize;
+    private Vector3 checkSize;
     [SerializeField]
     Transform groundCheck;
     [SerializeField]
@@ -35,28 +35,28 @@ public class PlayerDeplacement : MonoBehaviour
 
     private float moveInput;
     private bool facingRight = true;
-    private Rigidbody2D rb;
+    private Rigidbody rb;
     // Start is called before the first frame update
     void Start()
     {
         extraJumpValue = extraJump;
-        if (!TryGetComponent<Rigidbody2D>(out rb))
+        if (!TryGetComponent<Rigidbody>(out rb))
         {
-            Debug.LogError("Need a Rigidbody2D");
+            Debug.LogError("Need a Rigidbody");
         }
     }
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireCube(groundCheck.position, new Vector3(checkSize.x, checkSize.y));
+        Gizmos.DrawWireCube(groundCheck.position, checkSize);
 
     }
     private void FixedUpdate()
     {
         // Check if player is grounded
-        isGrounded = Physics2D.OverlapBox(groundCheck.position, checkSize, 0, groundLayers);
+        isGrounded = Physics.OverlapBox(groundCheck.position, checkSize, transform.rotation, groundLayers)?.Length != 0;
         //Move on X (lateral) axis
         moveInput = Input.GetAxisRaw(horizontalAxis);
-        rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
+        rb.velocity = new Vector3(moveInput * speed, rb.velocity.y);
         if (!facingRight && moveInput > 0)
         {
             Flip();
@@ -74,12 +74,12 @@ public class PlayerDeplacement : MonoBehaviour
 
         if (Input.GetButtonDown(VerticalAxis) && extraJumpValue > 0)
         {
-            rb.velocity = Vector2.up * jumpForce;
+            rb.AddForce(Vector3.up * jumpForce,ForceMode.Impulse);
             extraJumpValue--;
         }
         else if (Input.GetButtonDown(VerticalAxis) && extraJump == 0 && isGrounded == true)
         {
-            rb.velocity = Vector2.up * jumpForce;
+            rb.velocity = Vector3.up * jumpForce;
         }
     }
 
