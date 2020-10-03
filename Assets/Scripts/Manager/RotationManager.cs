@@ -9,12 +9,7 @@ public class RotationManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1) && CanRotatate())
         {
-            Rotation(90);
-            GameEvents.Instance.RotateCamera();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && CanRotatate())
-        {
-            Rotation(-90);
+            Rotation(90f);
             GameEvents.Instance.RotateCamera();
         }
     }
@@ -24,8 +19,10 @@ public class RotationManager : MonoBehaviour
         GameEvents.Instance.ResetPostion();
         Transform player = GameManager.Instance.GetPlayer();
         Camera.main.transform.parent = player;
-        player.Rotate(0, ry, 0);
-        Camera.main.transform.parent = null;
+        LerpRotation lerp;
+        if (!player.TryGetComponent<LerpRotation>(out lerp))
+            return;
+        lerp.SetAngle(ry);
 
     }
 
