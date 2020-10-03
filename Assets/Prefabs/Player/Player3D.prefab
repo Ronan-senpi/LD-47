@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 242700647518185714}
   - component: {fileID: 242700647518185709}
   - component: {fileID: 242700647518185713}
+  - component: {fileID: 160771418}
   m_Layer: 10
   m_Name: Player3D
   m_TagString: Untagged
@@ -92,7 +93,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e369801fb38833e4f91c43d0cc746dd2, type: 2}
+  - {fileID: 2100000, guid: 26a1493f35336f94ca6f09f35a885672, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -140,7 +141,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 120
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &242700647518185713
 MonoBehaviour:
@@ -162,3 +163,16 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 16384
   extraJump: 1
+--- !u!114 &160771418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 242700647518185719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a77902a959b27341a06a130f84c2cfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 100
