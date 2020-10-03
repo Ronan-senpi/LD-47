@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using Assets.Scripts;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,6 +29,7 @@ public class PlayerDeplacement3D : MonoBehaviour
 
     private bool isGrounded;
 
+    Axis moveAxis = Axis.y;
     public bool IsGrounded
     {
         get { return isGrounded; }
@@ -50,13 +53,23 @@ public class PlayerDeplacement3D : MonoBehaviour
         Gizmos.DrawWireCube(groundCheck.position, checkSize);
 
     }
+
+    public void SetMoveAxis(Axis axis)
+    {
+        moveAxis = axis;
+    }
+
     private void FixedUpdate()
     {
         // Check if player is grounded
         isGrounded = Physics.OverlapBox(groundCheck.position, checkSize, transform.rotation, groundLayers)?.Length != 0;
         //Move on X (lateral) axis
         moveInput = Input.GetAxisRaw(horizontalAxis);
-        rb.velocity = new Vector3(moveInput * speed, rb.velocity.y);
+        if (moveAxis == Axis.y)
+            rb.velocity = new Vector3(moveInput * speed, rb.velocity.y, rb.velocity.z);
+        else
+            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, moveInput * speed);
+
         if (!facingRight && moveInput > 0)
         {
             Flip();
@@ -89,7 +102,12 @@ public class PlayerDeplacement3D : MonoBehaviour
     void Flip()
     {
         facingRight = !facingRight;
-        Vector3 scaler = transform.localScale;
+        Vector3 scaler;
+        if (moveAxis != Axis.y && facingRight)
+        {
+            return;
+        }
+        scaler = transform.localScale;
         scaler.x *= -1;
         transform.localScale = scaler;
     }
