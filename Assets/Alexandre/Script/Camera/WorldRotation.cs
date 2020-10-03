@@ -28,7 +28,7 @@ public class WorldRotation : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.E))
             {
-                StartCoroutine(RotateMe(Vector3.up * -90, 0.3f));
+                StartCoroutine(RotateMe(Vector3.up * -90, 0.4f));
                enablekey = true;
             }
 
@@ -38,13 +38,21 @@ public class WorldRotation : MonoBehaviour
     IEnumerator RotateMe(Vector3 byAngles, float inTime)
     {
         var fromAngle = theWorld.transform.rotation;
+        Debug.Log(byAngles);
         var toAngle = Quaternion.Euler(theWorld.transform.eulerAngles + byAngles);
-        for (var t = 0f; t < 1; t += Time.deltaTime / inTime)
+        while (theWorld.transform.eulerAngles.y >= (theWorld.transform.eulerAngles + byAngles).y)
         {
-            theWorld.transform.rotation = Quaternion.Slerp(fromAngle, toAngle, t);
+            theWorld.transform.rotation = Quaternion.Slerp(fromAngle, toAngle,.3f);
             yield return null;
         }
+        //for (var t = 0f; t < 1; t += Time.deltaTime / inTime)
+        //{
+            
+        //}
         enablekey = false;
+        Debug.Log(theWorld.transform.eulerAngles + byAngles);
+        theWorld.transform.Rotate(theWorld.transform.eulerAngles + byAngles);
+
 
     }
 }
