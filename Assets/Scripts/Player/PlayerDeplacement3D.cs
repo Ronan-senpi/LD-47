@@ -80,11 +80,19 @@ public class PlayerDeplacement3D : MonoBehaviour
         animator.SetBool("IsJumping", !isGrounded);
         //Move on X (lateral) axis
         moveInput = Input.GetAxisRaw(horizontalAxis);
+        //Debug.Log(moveInput);
         if (moveAxis == Axis.x)
             rb.velocity = new Vector3(direction * (moveInput * speed), rb.velocity.y, rb.velocity.z);
         else
+        {
             rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, direction * (moveInput * speed));
-        animator.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
+            //Debug.Log(new Vector3(rb.velocity.x, rb.velocity.y, direction * (moveInput * speed)));
+        }
+        if (moveInput != 0)
+        {
+            AudioManager.Instance.Play("Walk");
+        }
+        animator.SetFloat("Speed", Mathf.Abs(moveInput));
         if (!facingRight && moveInput > 0)
         {
             Flip();
