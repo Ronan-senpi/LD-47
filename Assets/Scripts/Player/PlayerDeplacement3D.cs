@@ -39,11 +39,16 @@ public class PlayerDeplacement3D : MonoBehaviour
     private bool facingRight = true;
     private Rigidbody rb;
     private Animator animator;
+    private Projectil projectil;
 
     // Start is called before the first frame update
     void Start()
     {
         extraJumpValue = extraJump;
+        if ((projectil = GetComponentInChildren<Projectil>()) == null)
+        {
+            Debug.LogError("Need an Projectil");
+        } 
         if (!TryGetComponent<Animator>(out animator))
         {
             Debug.LogError("Need an Animator");
@@ -122,6 +127,11 @@ public class PlayerDeplacement3D : MonoBehaviour
         scaler = transform.localScale;
         scaler.x *= -1;
         transform.localScale = scaler;
+    }
+
+    void Shoot()
+    {
+        projectil.FireBullet();
     }
 
 }
