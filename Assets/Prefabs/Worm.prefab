@@ -417,6 +417,7 @@ GameObject:
   - component: {fileID: 8848632835914441295}
   - component: {fileID: 8848632835914441293}
   - component: {fileID: 5715072817869760336}
+  - component: {fileID: 1904593280}
   m_Layer: 10
   m_Name: Worm
   m_TagString: Untagged
@@ -472,7 +473,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 120
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &8848632835914441295
 MonoBehaviour:
@@ -564,6 +565,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1904593280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8848632835914441289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a77902a959b27341a06a130f84c2cfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 100
 --- !u!1 &8848632836125439273
 GameObject:
   m_ObjectHideFlags: 0
