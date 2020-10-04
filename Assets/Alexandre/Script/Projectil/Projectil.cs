@@ -7,31 +7,34 @@ public class Projectil : MonoBehaviour
     [SerializeField]
     private GameObject projectil;
 
-    public Rigidbody rigb;
+    [SerializeField]
+    private float force;
 
-   
-    // Start is called before the first frame update
-    void Start()
-    {
+    [SerializeField]
+    private Animator animator;
 
-        //rigb = projectil.GetComponent<Rigidbody>();
-    }
+    [SerializeField]
+    private AudioSource preFire;
+    [SerializeField]
+    private AudioSource fire;
 
     // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
-            FireBullet();
+            preFire.Play();
+            animator.SetTrigger("Attack");
         }
-        
     }
 
     public void FireBullet()
     {
-        GameObject clone;
-
-        clone = (Instantiate(projectil, transform.position + 1.0f * transform.forward, transform.rotation)) as GameObject;
-        clone.GetComponent<Rigidbody>().AddForce(5000, 0, 0);
+        preFire.Stop(); 
+        fire.Play();
+        float parentScaleX = transform.parent.localScale.x;
+        GameObject bullet = Instantiate<GameObject>(projectil, transform.position, transform.rotation);
+        bullet.transform.Rotate(Vector3.up * (parentScaleX < 0 ? 180f : 0f));
+        bullet.GetComponent<Rigidbody>().AddForce(parentScaleX * force, 0, 0);
     }
 }
