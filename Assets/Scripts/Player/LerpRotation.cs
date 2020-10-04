@@ -37,11 +37,11 @@ public class LerpRotation : MonoBehaviour
                 break;
             case 90:
                 v.x = GameManager.Instance.GetPlayer().transform.position.x;
-                GameManager.Instance.SetMoveAxis(Axis.z, 1);
+                GameManager.Instance.SetMoveAxis(Axis.z, -1);
                 break;
             case 270:
                 v.x = GameManager.Instance.GetPlayer().transform.position.x;
-                GameManager.Instance.SetMoveAxis(Axis.z, -1);
+                GameManager.Instance.SetMoveAxis(Axis.z, 1);
                 break;
             default:
                 break;
