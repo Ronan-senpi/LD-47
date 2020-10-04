@@ -13,10 +13,6 @@ public class TpBack : MonoBehaviour
     private LayerMask WhoIsTP;
     [SerializeField]
     private Camera cam;
-    [SerializeField]
-    private CinemachineBrain brainCam;
-    [SerializeField]
-    private CinemachineVirtualCamera VMcam;
     private void OnTriggerEnter(Collider other)
     {
         if ((WhoIsTP.value & (1 << other.gameObject.layer)) > 0)

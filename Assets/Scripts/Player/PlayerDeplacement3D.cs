@@ -88,9 +88,9 @@ public class PlayerDeplacement3D : MonoBehaviour
             rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, direction * (moveInput * speed));
             //Debug.Log(new Vector3(rb.velocity.x, rb.velocity.y, direction * (moveInput * speed)));
         }
-        if (true)
+        if (moveInput != 0)
         {
-
+            AudioManager.Instance.Play("Walk");
         }
         animator.SetFloat("Speed", Mathf.Abs(moveInput));
         if (!facingRight && moveInput > 0)

@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,10 +28,33 @@ public class AudioManager : MonoBehaviour
             s.Source.loop = s.GetLoop();
         }
     }
+
+    private Sound Find(string name)
+    {
+        return Array.Find(sounds, sound => sound.GetName() == name);
+    }
+
+    /// <summary>
+    /// Play sound
+    /// </summary>
+    /// <param name="name">Name of sound</param>
+    public Sound Play(string name)
+    {
+        Sound s = Find(name);
+        if (s != null && !s.Source.isPlaying)
+        {
+            s.Source.Play();
+            return s;
+        }
+        return null;
+    }
+
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        Play("MainTheme");
     }
 
     // Update is called once per frame
