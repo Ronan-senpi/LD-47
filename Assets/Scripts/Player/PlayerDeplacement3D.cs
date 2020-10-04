@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Assets.Scripts;
 using UnityEngine;
 
 public class PlayerDeplacement3D : MonoBehaviour
@@ -120,10 +119,6 @@ public class PlayerDeplacement3D : MonoBehaviour
     {
         facingRight = !facingRight;
         Vector3 scaler;
-        if (moveAxis != Axis.y && facingRight)
-        {
-            return;
-        }
         scaler = transform.localScale;
         scaler.x *= -1;
         transform.localScale = scaler;
