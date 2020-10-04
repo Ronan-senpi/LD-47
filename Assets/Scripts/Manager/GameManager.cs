@@ -49,9 +49,13 @@ public class GameManager : MonoBehaviour
     {
 
     }
-
-    public void SetMoveAxis(Axis axis)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="axis"></param>
+    /// <param name="direction">1 ou -1</param>
+    public void SetMoveAxis(Axis axis, float direction = 1)
     {
-        playerDeplacement.SetMoveAxis(axis);
+        playerDeplacement.SetMoveAxis(axis, direction);
     }
 }

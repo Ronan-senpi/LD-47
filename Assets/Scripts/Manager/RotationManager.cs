@@ -5,6 +5,12 @@ using UnityEngine;
 public class RotationManager : MonoBehaviour
 {
     bool inRotation;
+    [SerializeField]
+    Camera cam;
+    private void start()
+    {
+        GameEvents.Instance.onFreeCam += FreeCam;
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1) && CanRotatate())
@@ -16,14 +22,21 @@ public class RotationManager : MonoBehaviour
 
     void Rotation(float ry)
     {
-        GameEvents.Instance.ResetPostion();
+        //inRotation = true;
+        //GameEvents.Instance.ResetPostion();
         Transform player = GameManager.Instance.GetPlayer();
-        Camera.main.transform.parent = player;
+        cam.transform.parent = player;
         LerpRotation lerp;
         if (!player.TryGetComponent<LerpRotation>(out lerp))
             return;
         lerp.SetAngle(ry);
-        Camera.main.transform.parent = null;
+    }
+
+    void FreeCam()
+    {
+        cam.transform.parent = null;
+        //inRotation = false;
+
     }
 
     bool CanRotatate()

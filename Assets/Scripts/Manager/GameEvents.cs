@@ -29,7 +29,7 @@ public class GameEvents : MonoBehaviour
             onRotateCamera();
         }
     }
-    public Action onResetPostion;
+    public event Action onResetPostion;
     public void ResetPostion()
     {
         if (onResetPostion != null)
@@ -37,5 +37,12 @@ public class GameEvents : MonoBehaviour
             onResetPostion();
         }
     }
-
+    public event Action onFreeCam;
+    public void FreeCam()
+    {
+        if (onFreeCam != null)
+        {
+            onFreeCam();
+        }
+    }
 }
