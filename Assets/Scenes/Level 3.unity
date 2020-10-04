@@ -1508,7 +1508,7 @@ GameObject:
   - component: {fileID: 701070977}
   - component: {fileID: 701070979}
   - component: {fileID: 701070978}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Est
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3922,7 +3922,7 @@ GameObject:
   - component: {fileID: 706062045}
   - component: {fileID: 706062047}
   - component: {fileID: 706062046}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Nord
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7047,7 +7047,7 @@ GameObject:
   - component: {fileID: 971667493}
   - component: {fileID: 971667495}
   - component: {fileID: 971667494}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Ouest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11952,7 +11952,7 @@ GameObject:
   - component: {fileID: 1973142522}
   - component: {fileID: 1973142524}
   - component: {fileID: 1973142523}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Sud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
