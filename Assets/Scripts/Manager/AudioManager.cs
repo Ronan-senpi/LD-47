@@ -23,7 +23,7 @@ public class AudioManager : MonoBehaviour
         {
             s.Source = gameObject.AddComponent<AudioSource>();
             s.Source.clip = s.GetClip();
-            s.Source.volume = s.GetVolume();
+            s.Source.volume = 1;// s.GetVolume();
             s.Source.pitch = s.Getpitch();
             s.Source.loop = s.GetLoop();
         }
@@ -48,8 +48,20 @@ public class AudioManager : MonoBehaviour
         }
         return null;
     }
-
-
+    /// <summary>
+    /// Play sound
+    /// </summary>
+    /// <param name="name">Name of sound</param>
+    public Sound Stop(string name)
+    {
+        Sound s = Find(name);
+        if (s != null)
+        {
+            s.Source.Stop();
+            return s;
+        }
+        return null;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -60,6 +72,6 @@ public class AudioManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
