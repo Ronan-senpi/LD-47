@@ -34,7 +34,7 @@ public class PlatfomPositionController : MonoBehaviour
         //Si visible dans l'ecran scene alors TRUE
         if (!renderer.isVisible)
             return;
-
+        
         ResetPostion();
         Vector3 v = transform.position;
 

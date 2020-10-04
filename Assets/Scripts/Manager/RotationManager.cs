@@ -23,7 +23,7 @@ public class RotationManager : MonoBehaviour
         if (!player.TryGetComponent<LerpRotation>(out lerp))
             return;
         lerp.SetAngle(ry);
-
+        Camera.main.transform.parent = null;
     }
 
     bool CanRotatate()
