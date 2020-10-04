@@ -1,6 +1,4 @@
-﻿using Assets.Scripts;
-using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +6,8 @@ public class PlayerDeplacement3D : MonoBehaviour
 {
     //[Header("Keys")]
     private string horizontalAxis = "Horizontal";
-    private string VerticalAxis = "Vertical";
+    private string verticalAxis = "Vertical";
+    
     [Header("Walk")]
     [SerializeField]
     private float speed;
@@ -39,10 +38,16 @@ public class PlayerDeplacement3D : MonoBehaviour
     private float moveInput;
     private bool facingRight = true;
     private Rigidbody rb;
+    private Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
         extraJumpValue = extraJump;
+        if (!TryGetComponent<Animator>(out animator))
+        {
+            Debug.LogError("Need an Animator");
+        }
         if (!TryGetComponent<Rigidbody>(out rb))
         {
             Debug.LogError("Need a Rigidbody");
@@ -51,7 +56,6 @@ public class PlayerDeplacement3D : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(groundCheck.position, checkSize);
-
     }
 
     /// <summary>
@@ -69,13 +73,14 @@ public class PlayerDeplacement3D : MonoBehaviour
     {
         // Check if player is grounded
         isGrounded = Physics.OverlapBox(groundCheck.position, checkSize, transform.rotation, groundLayers)?.Length != 0;
+        animator.SetBool("IsJumping", !isGrounded);
         //Move on X (lateral) axis
         moveInput = Input.GetAxisRaw(horizontalAxis);
         if (moveAxis == Axis.x)
             rb.velocity = new Vector3(direction * (moveInput * speed), rb.velocity.y, rb.velocity.z);
         else
             rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, direction * (moveInput * speed));
-
+        animator.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
         if (!facingRight && moveInput > 0)
         {
             Flip();
@@ -91,14 +96,15 @@ public class PlayerDeplacement3D : MonoBehaviour
         if (isGrounded)
             extraJumpValue = extraJump;
 
-        if (Input.GetButtonDown(VerticalAxis) && extraJumpValue > 0)
+        if (Input.GetButtonDown("Jump"))
         {
-            rb.AddForce(Vector3.up * jumpForce,ForceMode.Impulse);
-            extraJumpValue--;
-        }
-        else if (Input.GetButtonDown(VerticalAxis) && extraJump == 0 && isGrounded == true)
-        {
-            rb.velocity = Vector3.up * jumpForce;
+            Vector3 jumpVector = Vector3.up * jumpForce;
+            if (extraJumpValue > 0) {
+                rb.AddForce(jumpVector, ForceMode.Impulse);
+                extraJumpValue--;
+            } else if (extraJump == 0 && isGrounded == true) {
+                rb.velocity = jumpVector;
+            }
         }
     }
 
