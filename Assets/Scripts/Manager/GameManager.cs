@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
 
     public Transform GetPlayer()
     {
-        return player.transform;
+        return player;
     }
 
     public float GetPlayerZ()
@@ -47,7 +47,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (player == null)
+        {
+            player = GameObject.Find("Worm").transform; 
+        }
     }
     /// <summary>
     /// 

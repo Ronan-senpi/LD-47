@@ -25,6 +25,10 @@ public class RotationManager : MonoBehaviour
         //inRotation = true;
         //GameEvents.Instance.ResetPostion();
         Transform player = GameManager.Instance.GetPlayer();
+        if (player == null)
+        {
+            player = GameObject.Find("Worm").transform;
+        }
         cam.transform.parent = player;
         LerpRotation lerp;
         if (!player.TryGetComponent<LerpRotation>(out lerp))
